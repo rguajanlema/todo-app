@@ -14,11 +14,12 @@ export const todoReducer = createReducer(
   }),
   on(actions.updateTodoAction, (state, todo) => {
     let tempTodoIndex = state.findIndex((t) => t.id == todo.id);
+    var tempStates = [...state];
 
     if (tempTodoIndex != -1) {
-      state[tempTodoIndex] = todo;
+      tempStates[tempTodoIndex] = todo;
     }
-    return [...state];
+    return [...tempStates];
   }),
   on(actions.deleteTodoAction, (state, todo) => {
     let todos: any = state.filter((t) => t.id != todo.id);

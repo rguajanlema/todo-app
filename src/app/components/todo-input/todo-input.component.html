@@ -1,4 +1,4 @@
 <div class="flex">
-    <input class="input px-2" type="text" placeholder="Ex. Meditate">
-    <button class="btn blue" >Add</button>
+    <input [(ngModel)]="todoInput" class="input px-2" type="text" placeholder="Ex. Meditate">
+    <button class="btn blue" (click)="addTodo()">Add</button>
 </div>

@@ -10,7 +10,7 @@ import { TodoModel, todos } from './todos.states';
 export const todoReducer = createReducer(
   todos,
   on(actions.addTodoAction, (state, todo) => {
-    return [...state, todo];
+    return [todo, ...state];
   }),
   on(actions.updateTodoAction, (state, todo) => {
     let tempTodoIndex = state.findIndex((t) => t.id == todo.id);

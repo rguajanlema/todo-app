@@ -20,12 +20,14 @@ export class TodoInputComponent implements OnInit {
   }
 
   addTodo() {
-    this.store.dispatch(
-      actions.addTodoAction({
-        id: this.todos!.length,
-        completed: false,
-        title: this.todoInput!,
-      })
-    );
+    if (this.todoInput!.trim().length > 0)
+      this.store.dispatch(
+        actions.addTodoAction({
+          id: this.todos!.length,
+          completed: false,
+          title: this.todoInput!.trim(),
+        })
+      );
+    this.todoInput = '';
   }
 }

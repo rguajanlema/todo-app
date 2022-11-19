@@ -11,12 +11,13 @@ import { TodoModel } from 'src/app/providers/todos.states';
 export class TodoItemComponent implements OnInit {
   @Input() todo?: TodoModel;
   editTodo: boolean = false;
+  completeTodo: boolean = false;
   todoInput?: string;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.editTodo = this.todo!.completed;
+    this.completeTodo = this.todo!.completed;
     this.todoInput = this.todo!.title;
   }
 
@@ -25,11 +26,25 @@ export class TodoItemComponent implements OnInit {
   }
   updateTodo() {
     this.editTodo = !this.editTodo;
+    if (this.todoInput!.trim().length > 0)
+      this.store.dispatch(
+        actions.updateTodoAction({
+          id: this.todo!.id,
+          completed: this.todo!.completed,
+          title: this.todoInput!.trim(),
+        })
+      );
+    else {
+      this.todoInput = this.todo!.title;
+    }
+  }
+  completeToggle() {
+    this.completeTodo = !this.completeTodo;
     this.store.dispatch(
       actions.updateTodoAction({
         id: this.todo!.id,
-        completed: this.todo!.completed,
-        title: this.todoInput!,
+        completed: this.completeTodo,
+        title: this.todo!.title,
       })
     );
   }
